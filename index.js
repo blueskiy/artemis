@@ -1,6 +1,8 @@
-require('dotenv').config();
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+import dotenv from 'dotenv';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+
+dotenv.config()
 
 const token = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -8,12 +10,10 @@ const GUILD_ID = process.env.GUILD_ID;
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-const commands = [
-  {
-    name: 'Artemis',
-    description: 'Replies with Artemis description.'
-  },
-];
+const commands = [{
+  name: 'artemis',
+  description: 'Replies with Artemis description.'
+}];
 
 
 (async () => {
