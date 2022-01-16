@@ -6,7 +6,7 @@ dotenv.config();
 
 const client = new Client({
   partials: ['CHANNEL'],
-  intents: ['GUILDS', 'DIRECT_MESSAGES', 'GUILD_MESSAGES', 'DIRECT_MESSAGE_TYPING']
+  intents: ['GUILDS', 'DIRECT_MESSAGES', 'GUILD_MESSAGES', 'DIRECT_MESSAGE_TYPING'],
 });
 
 const token = process.env.TOKEN;
@@ -45,8 +45,8 @@ client.on('interactionCreate', async interaction => {
 
 let authorIdentifier;
 
-const genAuthorIdentifier = (messageAuthorUsername, messageAuthorDiscriminator) => {
-  authorIdentifier = `${messageAuthorUsername}#${messageAuthorDiscriminator}`
+const genAuthorIdentifier = (authorName, authorTag) => {
+  authorIdentifier = `${authorName}#${authorTag}`;
 }
 
 client.on('messageCreate', message => {
@@ -69,12 +69,7 @@ client.on('messageCreate', message => {
   }
 
   if (message.channel.type === 'DM') {
-    if (message.author.bot === true) {
-      getLogger(`${authorIdentifier}`).all(taggedMessage);
-      return
-    }
-
-    getLogger(`${authorName}#${authorTag}`).all(taggedMessage);
+    getLogger(`${authorIdentifier}`).all(taggedMessage);
   }
 
   if (message.content === 'Hello Artemis') {
