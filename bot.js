@@ -48,17 +48,33 @@ client.on('interactionCreate', async interaction => {
 let authorIdentifier;
 
 const genAuthorIdentifier = (authorName, authorTag) => {
-  authorIdentifier = `${authorName}#${authorTag}`;
+  authorIdentifier = `${authorName.replace(' ', '_')}#${authorTag}`;
 }
 
 client.on('messageCreate', message => {
   const authorMessage = message.content;
   const authorName = message.author.username;
   const authorTag = message.author.discriminator;
-  const taggedMessage = `${authorName}#${authorTag}: ${authorMessage}`;
+  const taggedMessage = `${authorName.replace(' ', '_')}#${authorTag}: ${authorMessage}`;
+
+  const son = message.content.includes('<@!727937083477327883>');
+  const father = message.content.includes('<@!862033186762391563>');
+  const inosuke = message.content.includes('<@!405205980713058326>');
+  const hasCreatorId = son || father || inosuke;
+  const artemisId = '<@!837307398066274335>'
+  const hasArtemisId = message.mentions.has(client.user.id);
 
   if (message.author.bot !== true) {
     genAuthorIdentifier(authorName, authorTag);
+  }
+
+  if (message.channel.type === 'DM') {
+    getLogger(`${authorIdentifier}`).all(taggedMessage);
+  }
+
+  if (message.channel.type === 'DM' && message.content === 'oi') {
+    message.author.send('tudo bem?');
+    return
   }
 
   if (message.channel.type === 'GUILD_TEXT') {
@@ -70,28 +86,24 @@ client.on('messageCreate', message => {
     }
   }
 
-  if (message.channel.type === 'DM') {
-    getLogger(`${authorIdentifier}`).all(taggedMessage);
-  }
-
-  if (message.content === 'Hello Artemis') {
+  if (message.content === 'Hello Artêmis') {
     message.reply(`Hello ${message.member.nickname}`);
     return
   }
 
-  if (message.channel.type === 'DM' && message.content === 'oi') {
-    message.author.send('tudo bem?');
+  if (hasArtemisId && hasCreatorId) {
+    message.reply('O que você quer com o Criador?');
     return
   }
 
-  if (message.mentions.has(client.user.id) && message.content === '<@!837307398066274335>') {
+  if (message.content === artemisId) {
     const randomAnswer = Math.floor(Math.random() * mentionAnwers.length);
     message.reply(mentionAnwers[randomAnswer]);
 
     return
   }
 
-  if (message.mentions.has(client.user.id)) {
+  if (hasArtemisId) {
     const randomAnswer = Math.floor(Math.random() * mentionFailures.length);
     message.reply(mentionFailures[randomAnswer]);
 
