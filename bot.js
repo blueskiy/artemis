@@ -2,6 +2,8 @@ import logjs from 'log4js';
 import dotenv from 'dotenv';
 import { Client } from 'discord.js';
 
+import { mentionAnwers, mentionFailures } from './personality.js'
+
 dotenv.config();
 
 const client = new Client({
@@ -79,6 +81,20 @@ client.on('messageCreate', message => {
 
   if (message.channel.type === 'DM' && message.content === 'oi') {
     message.author.send('tudo bem?');
+    return
+  }
+
+  if (message.mentions.has(client.user.id) && message.content === '<@!837307398066274335>') {
+    const randomAnswer = Math.floor(Math.random() * mentionAnwers.length);
+    message.reply(mentionAnwers[randomAnswer]);
+
+    return
+  }
+
+  if (message.mentions.has(client.user.id)) {
+    const randomAnswer = Math.floor(Math.random() * mentionFailures.length);
+    message.reply(mentionFailures[randomAnswer]);
+
     return
   }
 });
