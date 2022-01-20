@@ -51,6 +51,13 @@ const genAuthorIdentifier = (authorName, authorTag) => {
   authorIdentifier = `${authorName.replace(' ', '_')}#${authorTag}`;
 }
 
+const withTyping = (message, reply, delay) => {
+  const delayCalc = (delay * 10 > 10000) ? 10000 : (delay * 100);
+
+  message.channel.sendTyping();
+  setTimeout(() => { reply() }, delayCalc);
+}
+
 client.on('messageCreate', message => {
   const authorMessage = message.content;
   const authorName = message.author.username;
@@ -73,7 +80,10 @@ client.on('messageCreate', message => {
   }
 
   if (message.channel.type === 'DM' && message.content === 'oi') {
-    message.author.send('tudo bem?');
+    const answer = 'tudo bem?';
+    const reply = () => message.author.send(answer);
+
+    withTyping(message, reply, answer.length);
     return
   }
 
@@ -87,26 +97,34 @@ client.on('messageCreate', message => {
   }
 
   if (message.content === 'Hello Artêmis') {
-    message.reply(`Hello ${message.member.nickname}`);
+    const answer = `Hello ${message.member.nickname}`;
+    const reply = () => message.reply(answer);
+
+    withTyping(message, reply, answer.length);
     return
   }
 
   if (hasArtemisId && hasCreatorId) {
-    message.reply('O que você quer com o Criador?');
+    const answer = 'O que você quer com o Criador?';
+    const reply = () => message.reply(answer);
+
+    withTyping(message, reply, answer.length);
     return
   }
 
   if (message.content === artemisId) {
     const randomAnswer = Math.floor(Math.random() * mentionAnwers.length);
-    message.reply(mentionAnwers[randomAnswer]);
+    const reply = () => message.reply(mentionAnwers[randomAnswer]);
 
+    withTyping(message, reply, mentionAnwers[randomAnswer].length);
     return
   }
 
   if (hasArtemisId) {
     const randomAnswer = Math.floor(Math.random() * mentionFailures.length);
-    message.reply(mentionFailures[randomAnswer]);
+    const reply = () => message.reply(mentionFailures[randomAnswer]);
 
+    withTyping(message, reply, mentionFailures[randomAnswer].length);
     return
   }
 });
