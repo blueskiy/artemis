@@ -2,7 +2,7 @@ import logjs from 'log4js';
 import dotenv from 'dotenv';
 import { Client } from 'discord.js';
 
-import { mentionAnwers, mentionFailures } from './personality.js'
+import { mentionAnwers, mentionFailures } from './personality.js';
 
 dotenv.config();
 
@@ -42,7 +42,7 @@ client.on('interactionCreate', async interaction => {
     await interaction.reply('Nobody even knows who I am.');
   }
 
-  return;
+  return
 });
 
 let authorIdentifier;
@@ -68,7 +68,7 @@ client.on('messageCreate', message => {
   const father = message.content.includes('<@!862033186762391563>');
   const inosuke = message.content.includes('<@!405205980713058326>');
   const hasCreatorId = son || father || inosuke;
-  const artemisId = '<@!837307398066274335>'
+  const artemisId = '<@837307398066274335>';
   const hasArtemisId = message.mentions.has(client.user.id);
 
   if (message.author.bot !== true) {
