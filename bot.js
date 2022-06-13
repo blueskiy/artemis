@@ -2,7 +2,7 @@ import logjs from 'log4js';
 import dotenv from 'dotenv';
 import { Client } from 'discord.js';
 
-import { mentionAnwers, mentionFailures } from './personality.js';
+import { mentionAnwers, mentionFailures, spontaneousInteractions } from './personality.js';
 
 dotenv.config();
 
@@ -125,6 +125,14 @@ client.on('messageCreate', message => {
     const reply = () => message.reply(mentionFailures[randomAnswer]);
 
     withTyping(message, reply, mentionFailures[randomAnswer].length);
+    return
+  }
+  
+    if (message.content === 'bom dia') {
+    const randomAnswer = Math.floor(Math.random() * spontaneousInteractions[0].length);
+    const reply = () => message.reply(spontaneousInteractions[0][randomAnswer]);
+
+    withTyping(message, reply, spontaneousInteractions[0][randomAnswer].length);
     return
   }
 });
