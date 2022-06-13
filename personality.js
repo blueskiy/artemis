@@ -1,12 +1,12 @@
-const mentionAnswerOne = 'fala';
-const mentionAnswerTwo = 'oiii';
-const mentionAnswerThree = '?';
-const mentionAnswerFour = 'Eu';
-const mentionAnswerFive = 'Oi';
+const mentionAnswerOne = "fala";
+const mentionAnswerTwo = "oiii";
+const mentionAnswerThree = "?";
+const mentionAnswerFour = "Eu";
+const mentionAnswerFive = "Oi";
 
-const mentionFailOne = 'Eu ainda não sei ler, apenas sei o meu nome.';
-const mentionFailTwo = 'Desculpa, eu não consigo entender o que você diz.';
-const mentionFailThree = 'Hã...?';
+const mentionFailOne = "Eu ainda não sei ler, apenas sei o meu nome.";
+const mentionFailTwo = "Desculpa, eu não consigo entender o que você diz.";
+const mentionFailThree = "Hã...?";
 
 const morningInteractions = [
   "Excelente dia :)",
@@ -15,8 +15,16 @@ const morningInteractions = [
   "Nem dormi ainda... Então é boa noite ;-;",
   "bundia u3u",
 ];
-const afternoonInteractions = ["mó sono..."];
-const nightInteractions = ["boooa noite"];
+const afternoonInteractions = [
+  "mó sono...",
+  "Bati mó pratão no almoço e agora bateu a lombeira",
+  "Boa!",
+];
+const nightInteractions = [
+  "boooa noite",
+  "A lua está linda",
+  "Boa noite mesmo, olha como o céu tá estrelado hoje!",
+];
 
 export const mentionAnwers = [
   mentionAnswerOne,
