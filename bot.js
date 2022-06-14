@@ -208,7 +208,7 @@ client.on('messageCreate', (message) => {
     }
   }
 
-  if (hour >= 12 && hour <= 18) {
+  if (hour >= 18 && hour <= 5) {
     if (message.content.toLowerCase() === 'boa noite') {
       const randomAnswer = Math.floor(
         Math.random() * spontaneousInteractions[2].length
